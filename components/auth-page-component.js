@@ -70,7 +70,7 @@ export function renderAuthPageComponent({ appEl, setUser }) {
       renderUploadImageComponent({
         element: appEl.querySelector(".upload-image-container"),
         onImageUrlChange(newImageUrl) {
-          imageUrl = newImageUrl;
+           imageUrl = newImageUrl;
         },
       });
     }
@@ -97,6 +97,7 @@ export function renderAuthPageComponent({ appEl, setUser }) {
           password: password,
         })
           .then((user) => {
+            console.log(user.user.token);
             setUser(user.user);
           })
           .catch((error) => {

@@ -4,12 +4,12 @@ const personalKey = "prod";
 const baseHost = "https://webdev-hw-api.vercel.app";
 const postsHost = `${baseHost}/api/v1/${personalKey}/instapro`;
 
-export function getPosts({ token }) {
+export function getPosts() {
   return fetch(postsHost, {
     method: "GET",
-    headers: {
-      Authorization: token,
-    },
+    // headers: {
+    //   Authorization: token,
+    // },
   })
     .then((response) => {
       if (response.status === 401) {
@@ -52,7 +52,9 @@ export function loginUser({ login, password }) {
     if (response.status === 400) {
       throw new Error("Неверный логин или пароль");
     }
-    return response.json();
+    let userR = response.json();
+    console.log(userR);
+    return userR;
   });
 }
 
