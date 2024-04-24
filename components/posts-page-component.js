@@ -43,7 +43,7 @@ export function renderPostsPageComponent({ appEl }) {
                     </div>
                     <p class="post-text">
                       <span class="user-name">${post.user.name}</span>
-                      Ромашка, ромашка...
+                      ${post.description}
                     </p>
                     <p class="post-date">
                       19 минут назад
