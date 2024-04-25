@@ -1,4 +1,5 @@
 import { loginUser, registerUser } from "../api.js";
+import { sanitizeHtml } from "../helpers.js";
 import { renderHeaderComponent } from "./header-component.js";
 import { renderUploadImageComponent } from "./upload-image-component.js";
 
@@ -70,7 +71,7 @@ export function renderAuthPageComponent({ appEl, setUser }) {
       renderUploadImageComponent({
         element: appEl.querySelector(".upload-image-container"),
         onImageUrlChange(newImageUrl) {
-           imageUrl = newImageUrl;
+          imageUrl = newImageUrl;
         },
       });
     }
@@ -97,7 +98,6 @@ export function renderAuthPageComponent({ appEl, setUser }) {
           password: password,
         })
           .then((user) => {
-            console.log(user.user.token);
             setUser(user.user);
           })
           .catch((error) => {
@@ -128,9 +128,9 @@ export function renderAuthPageComponent({ appEl, setUser }) {
         }
 
         registerUser({
-          login: login,
+          login: sanitizeHtml(login),
           password: password,
-          name: name,
+          name: sanitizeHtml(name),
           imageUrl,
         })
           .then((user) => {
