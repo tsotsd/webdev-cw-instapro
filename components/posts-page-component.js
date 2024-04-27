@@ -7,12 +7,12 @@ import { ru } from "date-fns/locale";
 
 export function renderPostsPageComponent({singleUserMode}) {
   // TODO: реализовать рендер постов из api
-  console.log("Актуальный список постов:", posts);
+  // console.log("Актуальный список постов:", posts);
 
   const appElement = document.getElementById('app');
   const appEl = posts.map((post) => {
     if(singleUserMode){
-      console.log(post);
+ 
     }
     
     return `
@@ -63,19 +63,22 @@ export function renderPostsPageComponent({singleUserMode}) {
 initLikeListener(singleUserMode);
 }
 
+
+
 function initLikeListener(singleUserMode) {
   const likeButtonElement = document.querySelectorAll(".like-button");
   for (const likeElement of likeButtonElement) {
     likeElement.addEventListener("click", () => {
       const userId = likeElement.dataset.index;
-      console.log(userId);
+     
       if (!token) {
-        alert("Пожалуйста, зарегистрируйтесь или войдите в аккаунт");
+        alert("Лайкать посты могут только автризованные пользователи");
         return;
       }
       if (likeElement.dataset.liked === "true") {
         dislike({
-          id: likeElement.dataset.postId, token: getToken()
+          id: likeElement.dataset.postId, 
+          token: getToken()
         })
         .then(() => {
           if (singleUserMode) {
@@ -88,13 +91,19 @@ function initLikeListener(singleUserMode) {
       }
       else {
         like({
-          id: likeElement.dataset.postId, token: getToken()
+          id: likeElement.dataset.postId, 
+          token: getToken()
         })
         .then(() => {
           if (singleUserMode) {
+            //console.log('unlikeel-', singleUserMode);
+            //likeElement.dataset.liked = "true";
+            
             goToPage(USER_POSTS_PAGE, { userId })
           }
           else {
+            //console.log('likeel-', singleUserMode);
+            //likeElement.dataset.liked = "false";
             goToPage(POSTS_PAGE, { noLoading: true })
           }
         });

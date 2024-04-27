@@ -62,21 +62,21 @@ export const goToPage = (newPage, data) => {
           renderApp();
         })
         .catch((error) => {
-          console.error(error);
+          //console.error(error);
           goToPage(POSTS_PAGE);
         });
     }
 
     if (newPage === USER_POSTS_PAGE) {
       // TODO: реализовать получение постов юзера из API
-      console.log("Открываю страницу пользователя: ", data.userId);
+     // console.log("Открываю страницу пользователя: ", data.userId);
       return getUserPosts({id: data.userId, token: getToken()})
       .then((newPosts) => {
         page = USER_POSTS_PAGE;
         posts = newPosts;
         renderApp();
       }).catch((error) => {
-        console.log(error);
+        //console.log(error);
         goToPage();
       })
     }
@@ -118,7 +118,7 @@ const renderApp = () => {
       appEl,
       onAddPostClick({ description, imageUrl }) {
         // TODO: реализовать добавление поста в API
-        console.log("Добавляю пост...", { description, imageUrl });
+       // console.log("Добавляю пост...", { description, imageUrl });
         addPost({description, imageUrl})
         .then(() => {
           goToPage(POSTS_PAGE);
@@ -137,3 +137,5 @@ const renderApp = () => {
 };
 }
 goToPage(POSTS_PAGE);
+
+//goToPage(POSTS_PAGE, { noLoading: true }) //goToPage(USER_POSTS_PAGE, { userId })

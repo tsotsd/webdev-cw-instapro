@@ -18,7 +18,6 @@ export function getPosts({ token }) {
       if (response.status === 401) {
         throw new Error("Нет авторизации");
       }
-
       return response.json();
     })
     .then((data) => {
@@ -27,8 +26,8 @@ export function getPosts({ token }) {
 }
 
 export function getUserPosts( {id, token}) {
-  console.log(id);
-  console.log("token", token);
+  //console.log(id);
+  //console.log("token", token);
   return fetch(postsHost + `/user-posts/${id}`, {
     method: "GET",
     headers: {
@@ -111,6 +110,10 @@ export function like({id, token}) {
     },
   }).then((response) => {
     return response.json();
+  }).catch((err) => {
+      console.log('fdjkghjksdflgh', err);
+      alert('Нет подключения к интернету');
+      return err;
   })
 }
 
@@ -122,5 +125,9 @@ export function dislike({id, token}) {
     },
   }).then((response) => {
     return response.json();
+  }).catch((err) => {
+    console.log('fdjkghjksdflgh243234', err);
+    alert('Нет подключения к интернету');
+    return err;
   });
 }
