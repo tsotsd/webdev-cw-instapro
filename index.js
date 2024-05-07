@@ -35,7 +35,7 @@ export const logout = () => {
 /**
  * Включает страницу приложения
  */
-export const goToPage = (newPage, data) => {
+export const goToPage = (newPage, data, options = {noLoading: false}) => {
   if (
     [
       POSTS_PAGE,
@@ -52,9 +52,10 @@ export const goToPage = (newPage, data) => {
     }
 
     if (newPage === POSTS_PAGE) {
-      page = LOADING_PAGE;
-      renderApp();
-
+      if (!options.noLoading) {
+        page = LOADING_PAGE;
+        renderApp();
+      }
       return getPosts({ token: getToken() })
         .then((newPosts) => {
           page = POSTS_PAGE;
@@ -62,8 +63,9 @@ export const goToPage = (newPage, data) => {
           renderApp();
         })
         .catch((error) => {
+          alert(`Ошибка получения постов: ${error}`)
           //console.error(error);
-          goToPage(POSTS_PAGE);
+          //goToPage(POSTS_PAGE);
         });
     }
 

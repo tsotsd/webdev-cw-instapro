@@ -85,9 +85,12 @@ function initLikeListener(singleUserMode) {
             goToPage(USER_POSTS_PAGE, { userId })
           }
           else {
-            goToPage(POSTS_PAGE, { noLoading: true })
+            goToPage(POSTS_PAGE, null, { noLoading: true })
           }
         })
+        // .catch((error) => {
+        //   alert(error);
+        // })
       }
       else {
         like({
@@ -104,7 +107,7 @@ function initLikeListener(singleUserMode) {
           else {
             //console.log('likeel-', singleUserMode);
             //likeElement.dataset.liked = "false";
-            goToPage(POSTS_PAGE, { noLoading: true })
+            goToPage(POSTS_PAGE, null, {noLoading: true} )
           }
         });
       }
