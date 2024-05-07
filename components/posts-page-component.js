@@ -72,7 +72,7 @@ function initLikeListener(singleUserMode) {
       const userId = likeElement.dataset.index;
      
       if (!token) {
-        alert("Лайкать посты могут только автризованные пользователи");
+        alert("Лайкать посты могут только авторизованные пользователи");
         return;
       }
       if (likeElement.dataset.liked === "true") {
